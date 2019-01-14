@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<html lang="en">
+<!-- begin::Head -->
+
+<head>
+	<meta charset="utf-8" />
+	<title>
+		Purple Signs
+	</title>
+	<meta name="description" content="Latest updates and statistic charts">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!--begin::Web font -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+	<script>
+		WebFont.load({
+			google: { "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"] },
+			active: function () {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+
+	<!--end::Web font -->
+	<!--begin::Base Styles -->
+
+	<link href="/static/login/assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"
+	/>
+	<link href="/static/login/assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
+	<!--end::Base Styles -->
+	<link rel="icon" href="/static/img/favicon.png" type="image/png" sizes="16x16">
+</head>
+<!-- end::Head -->
+<!-- end::Body -->
+
+<body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+	<!-- begin:: Page -->
+
+	<script>
+		window.fbAsyncInit = function () {
+			FB.init({
+				appId: '{your-app-id}',
+				cookie: true,
+				xfbml: true,
+				version: '{api-version}'
+			});
+
+			FB.AppEvents.logPageView();
+
+		};
+
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) { return; }
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<div class="m-grid m-grid--hor m-grid--root m-page">
+		<div class="m-login m-login--signin  m-login--5" id="m_login" style="background-image: url(https://ak4.picdn.net/shutterstock/videos/16761244/thumb/1.jpg);">
+			<div class="m-login__wrapper-1 m-portlet-full-height">
+				<div class="m-login__wrapper-1-1">
+					<div class="m-login__contanier" style="border-right:purple 1px solid">
+						<div class="m-login__content">
+							<div class="m-login__logo">
+								<a href="#">
+									<img src="/static/login/purple_signs_icon.png" style="background-color:white">
+								</a>
+							</div>
+							<div class="m-login__title">
+								<h3>
+									Welcome to Purple Signs
+								</h3>
+							</div>
+							<div class="m-login__desc">
+								A chance for you to learn sign Language in a cool way
+							</div>
+							<div class="m-login__form-action">
+								<button type="button" id="m_login_signup" class="btn btn-outline-focus m-btn--pill">
+									Get An Account
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="m-login__border">
+						<div></div>
+					</div>
+				</div>
+			</div>
+			<div class="m-login__wrapper-2 m-portlet-full-height">
+				<div class="m-login__contanier">
+					<div class="m-login__signin">
+						<div class="m-login__head">
+							<h3 class="m-login__title">
+								Login To Your Account<br/>
+								<br/>
+								<a href="/authorize/facebook" class="btn btn-danger" style="background-color:#3b5998; border:#3b5998 1px solid"><i
+									 href="#" class="fa fa-facebook" style="color:white"></i>
+									&nbsp; Continue with Facebook</a>
+							</h3>
+
+						</div>
+
+						<form id="loginform" class="m-login__form m-form">
+							<span class="text-center" id="error_message" style=" color:red; display:none">Invalid Login Credentials
+							</span>
+							<div class="form-group m-form__group">
+								<input id="username" class="form-control m-input" type="text" placeholder="Username" name="email" autocomplete="off">
+							</div>
+							<div class="form-group m-form__group">
+								<input id="password" class="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password">
+							</div>
+							<div class="row m-login__form-sub">
+								<div class="col m--align-left m-login__form-left">
+									<label class="m-checkbox  m-checkbox--light">
+										<input type="checkbox" name="remember"> Remember me
+										<span></span>
+									</label>
+								</div>
+								<div class="col m--align-right m-login__form-right">
+									<a href="javascript:;" id="m_login_forget_password" class="m-link">
+										Forgot Password ?
+									</a>
+								</div>
+							</div>
+							<div class="m-login__form-action">
+
+
+								<button id="button" style="color:white" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+									Sign In
+								</button>
+							</div>
+						</form>
+					</div>
+					<div class="m-login__signup">
+						<div class="m-login__head">
+							<h3 class="m-login__title">
+								Sign Up
+							</h3>
+							<div class="m-login__desc">
+								Enter your details to create your account:
+							</div>
+						</div>
+						<form class="m-login__form m-form" action="">
+							<div class="form-group m-form__group">
+								<input class="form-control m-input" type="text" placeholder="First Name" id="first_name">
+								<div id="divAfterTextBox-id"></div>
+							</div>
+							<div class="form-group m-form__group">
+								<input class="form-control m-input" type="text" placeholder="Last Name" id="surname">
+							</div>
+							<div class="form-group m-form__group">
+								<input class="form-control m-input" type="text" placeholder="Phone Number" id="phoneInput">
+							</div>
+							<div class="form-group m-form__group">
+								<input class="form-control m-input" type="email" placeholder="Email" id="emailInput">
+							</div>
+							<div class="form-group m-form__group">
+
+								<input class="form-control m-input" type="text" placeholder="Username" id="usernameInput">
+								<span class="text-center" id="error_message2" style=" color:red; display: none">Username Already Taken
+								</span>
+							</div>
+							<div class="form-group m-form__group">
+								<input class="form-control m-input" type="password" placeholder="Password" id="passwordInput">
+							</div>
+
+
+
+							<div class="m-login__form-sub">
+								<label class="m-checkbox m-checkbox--focus">
+									<input type="checkbox" name="agree"> I Agree the
+									<a href="#" class="m-link m-link--focus">
+										terms and conditions
+									</a>
+									.
+									<span></span>
+								</label>
+								<span class="m-form__help"></span>
+							</div>
+							<div class="m-login__form-action">
+								<button id="signupform" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+									Sign Up
+								</button>
+								<button id="m_login_signup_cancel" class="btn btn-outline-focus m-btn m-btn--pill m-btn--custom">
+									Cancel
+								</button>
+							</div>
+						</form>
+					</div>
+					<div class="m-login__forget-password">
+						<div class="m-login__head">
+							<h3 class="m-login__title">
+								Forgotten Password ?
+							</h3>
+							<div class="m-login__desc">
+								Enter your email to reset your password:
+							</div>
+						</div>
+						<form class="m-login__form m-form" action="">
+							<div class="form-group m-form__group">
+								<input class="form-control m-input" type="text" placeholder="Email" name="email" id="m_email" autocomplete="off">
+							</div>
+							<div class="m-login__form-action">
+								<button id="m_login_forget_password_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+									Request
+								</button>
+								<button id="m_login_forget_password_cancel" class="btn btn-outline-focus m-btn m-btn--pill m-btn--custom ">
+									Cancel
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="examplemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Set Up Billing</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						Purple Signs is a Subscription Based whereby you only pay $1 via Ecocash
+					</div>
+					<div class="form-group">
+						Pay Via Ecocash
+					</div>
+					<div class="form-group">
+						<input type="number" id="phone_number" class="form-control" placeholder="Enter Ecocash Number">
+					</div>
+					<div class="form-group">
+						After Clicking Submit Check your phone for a payment screen
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" id="make_payment" class="btn btn-primary">Make Payment</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end:: Page -->
+		<!--begin::Base Scripts -->
+		<script src="/static/login/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+		<script src="/static/login/assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
+		<!--end::Base Scripts -->
+		<!--begin::Page Snippets -->
+		<script src="/static/login/assets/snippets/custom/pages/user/login.js" type="text/javascript"></script>
+
+		<script>
+			$("#button").click(function (event) {
+				event.preventDefault();
+				data = {};
+
+				data["username"] = $("#username").val();
+				data["password"] = $("#password").val();
+				data_json = JSON.stringify(data);
+
+
+				$.ajax({
+					data: data_json,
+					contentType: "application/json",
+					type: "POST",
+					url: "http://127.0.0.1:5000/web_auth"
+				}).done(function (data) {
+					if (data.error) {
+						console.log(data)
+					} else {
+						if (data.id == 0) {
+							$("#signupform").removeClass("m-loader m-loader--right m-loader--light")
+							$("#error_message").show();
+						}
+						else {
+							$("#signupform").removeClass("m-loader m-loader--right m-loader--light")
+							window.location = '/home?id=' + data.id
+						}
+
+					}
+				});
+			});
+
+			$("#signupform").click(function (event) {
+				event.preventDefault();
+				$(this).addClass("m-loader m-loader--right m-loader--light")
+				data = {};
+
+				data["first_name"] = $("#first_name").val();
+				data["surname"] = $("#surname").val();
+				data["email"] = $("#emailInput").val();
+				data["phone"] = $("#phoneInput").val();
+				data["username"] = $("#usernameInput").val();
+				data["password"] = $("#passwordInput").val();
+				data_json = JSON.stringify(data);
+				console.log(data_json);
+				console.log(data);
+				$.ajax({
+					data: data,
+					type: "POST",
+					url: "http://127.0.0.1:5000/register",
+					complete: function (response) {
+						if (response.status == 201) {
+							console.log("201");
+							$('#examplemodal').modal('show');
+
+						}
+						if (response.status == 400) {
+							console.log("Username Already Exists");
+							$("#error_message2").show();
+							$("#signupform").removeClass("m-loader m-loader--right m-loader--light")
+						}
+					}
+				}).done(function (data) {
+					if (data.error) {
+						$("#signupform").removeClass("m-loader m-loader--right m-loader--light")
+					} else {
+						$(this).removeClass("m-loader m-loader--right m-loader--light")
+					}
+				});
+
+			});
+
+			$("#make_payment").click(function (event) {
+				event.preventDefault();
+				$(this).addClass("m-loader m-loader--right m-loader--light")
+				data = {};
+
+				data["phone_number"] = $("#phone_number").val();
+				
+				data_json = JSON.stringify(data);
+				console.log(data_json);
+				console.log(data);
+				$.ajax({
+					data: data,
+					type: "POST",
+					url: "http://127.0.0.1:5000/pay",
+					complete: function (response) {
+						if (response.status == 201) {
+							console.log("201");
+							$('#examplemodal').modal('show');
+							
+						}
+						if (response.status == 400) {
+							console.log("Username Already Exists");
+							$("#error_message2").show();
+							$("#signupform").removeClass("m-loader m-loader--right m-loader--light")
+						}
+					}
+				}).done(function (data) {
+					if (data.error) {
+						$("#signupform").removeClass("m-loader m-loader--right m-loader--light")
+					} else {
+						$(this).removeClass("m-loader m-loader--right m-loader--light")
+					}
+				});
+
+			});
+
+
+			var textbox = document.getElementById("first_name");
+			divAfterTextBox = document.getElementById("divAfterTextBox-id");
+
+			textbox.onkeyup = function () {
+
+			}
+
+			function validEmail(email) {
+				var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				return re.test(email);
+				console.log(re.test(email));
+			};
+
+		</script>
+		<!--end::Page Snippets -->
+</body>
+<!-- end::Body -->
+
+</html>

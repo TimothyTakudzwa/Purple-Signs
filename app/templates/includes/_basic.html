@@ -1,0 +1,43 @@
+<div id="basic" style="display:none">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h4 class="card-title">Basic Words List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="toolbar">
+                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                    </div>
+                    <table id="example" class="table  table-bordered" style="width:100%">
+                        <thead style="background:linear-gradient(60deg, purple, #8e24aa); color:rgb(231, 227, 227)">
+                            <tr>
+                                <th class="text-center"><b>List of Phrases</b></th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%if phrases %} {% for phrase in phrases %}
+                            <tr>
+                                <td>{{ phrase.phrase }}</td>
+
+                            </tr>
+                            {% endfor %} {% else %} {% endif %}
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <!-- end content-->
+            </div>
+            <!--  end card  -->
+        </div>
+        <!-- end col-md-12 -->
+    </div>
+
+
+</div>

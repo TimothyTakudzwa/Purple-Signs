@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Content Uploading</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.5/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.5/sweetalert2.min.css" />
+    <script>
+        function getcourses() {
+
+            $(document).ready(function () {
+
+                $.ajax({
+                    url: "/get_courses",
+                    type: "GET",
+                    dataType: "json", // added data type
+                    success: function (res) {
+                        response = res;
+                        $(function () {
+                            $.each(response, function (i, item) {
+                                $("#options").append("<option value='" + item.id + "'>" + item.name + "</option>")
+                            });
+
+                        });
+                    }
+                });
+            });
+        }
+    </script>
+
+</head>
+
+<body onload="getcourses()">
+
+    <div class="container">
+        <br /><br />
+
+        <ul class="nav nav-tabs">
+
+            <li class="active"><a data-toggle="tab" href="#home">Courses</a></li>
+            <li><a data-toggle="tab" href="#menu2">Basic Greetings</a></li>
+            <li><a data-toggle="tab" href="#menu3">Alphabet</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <form method="POST" action="/admin/upload_content" enctype="multipart/form-data">
+                    <br />
+                    <div class="form-group">
+                        <a href="#exampleModal" data-toggle="modal"><button class="btn btn-primary">Create New Course</button></a>
+                    </div>
+                    <h3 class="text-center">Create Course Sections</h3>
+                    <div class="form-group">
+                        <label>Choose Course For Content Upload</label>
+                        <select name="course_id" class="form-control" id="options">
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Section Name</label>
+                        <input name="section_name" type="text" class="form-control">
+                    </div>
+                    <div class="form-group"><label>Upload Content</label><input type="file" class="btn btn-success"
+                            name="file"></div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-round btn-primary" value="Upload">
+                    </div>
+
+
+                </form>
+
+            </div>
+            <div id="menu3" class="tab-pane fade">
+
+                <form method="POST" action="/admin/upload_alphabet" enctype="multipart/form-data">
+                    <br />
+
+                    <h3 class="text-center"> Alphabet Content</h3>
+
+                    <div class="form-group">
+                        <label>Enter Word</label>
+                        <input name="word" type="text" class="form-control">
+                    </div>
+                    <div class="form-group"><label>Upload Content</label><input type="file" class="btn btn-success"
+                            name="file"></div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-round btn-primary" value="Upload">
+                    </div>
+
+
+                </form>
+
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <h3>Basic Phrases or Greetings</h3>
+                <form method="POST" action="/admin/upload_alphabet" enctype="multipart/form-data">
+                    <br />
+
+                    <div class="form-group">
+                        <label>Phrase</label>
+                        <input name="word" type="text" class="form-control">
+                    </div>
+                    <div class="form-group"><label>Upload Content</label><input type="file" class="btn btn-success"
+                            name="file"></div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-round btn-primary" value="Upload">
+                    </div>
+
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Modals -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Course</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="/admin/save_course" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Course Name</label>
+                            <input name="course_name" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
