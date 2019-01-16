@@ -3,24 +3,24 @@ import os
 from flask import render_template, request, json, url_for, flash, redirect, jsonify
 from werkzeug.utils import secure_filename
 from . import app, db, forms, basic_auth,api, login_manager, paynow
-# from .security import authenticate, identity
+from .security import authenticate, identity
 from flask_login import current_user
 from .models import *
 from .models import User
-# from .oauth import *
-# from .resources.user import UserRegister
-# from .helper_functions import ServerResponse, allowed_file
+from .oauth import *
+from .resources.user import UserRegister
+from .helper_functions import ServerResponse, allowed_file
 from flask_restful import Resource, Api
 from paynow import Paynow
 from flask_jwt import JWT
 
-# jwt = JWT(app, authenticate, identity)
+jwt = JWT(app, authenticate, identity)
 
 api.add_resource(AllCourses, '/all_courses')
 api.add_resource(AllWords, '/all_words')
 api.add_resource(AllPhrases, '/all_phrases')
 api.add_resource(AllSections, '/all_sections/<int:id>')
-# api.add_resource(UserRegister, '/register')
+api.add_resource(UserRegister, '/register')
 
 paynow = Paynow('3519','04313a56-c9ec-426c-ad80-35de0a744b46', 'http://google.com', 'http://google.com')
 
