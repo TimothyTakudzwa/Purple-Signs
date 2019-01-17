@@ -8,6 +8,7 @@ from flask_login import current_user
 from .models import *
 from .models import User
 from .oauth import *
+from rauth import OAuth2Service
 from .resources.user import UserRegister
 from .helper_functions import ServerResponse, allowed_file
 from flask_restful import Resource, Api
