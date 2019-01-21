@@ -21,7 +21,7 @@ paynow = Paynow(
     '8db834f2-8a94-40a5-a716-e3f5bbfe4a37',
     'http://google.com', 
     'http://google.com'
-    )
+)
 
 
 app.config['BASIC_AUTH_USERNAME'] = 'purple'
@@ -30,4 +30,5 @@ app.config['BASIC_AUTH_PASSWORD'] = 'purple'
 
 
 basic_auth = BasicAuth(app)
-from . import views, models, app, db
+
+from . import views

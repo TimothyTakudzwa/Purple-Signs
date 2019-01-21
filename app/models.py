@@ -181,13 +181,6 @@ class AllWords(Resource):
         results = words_schema.dump(Content.get_all()).data      
         return results
 
-class CurrentUser(Resource):
-    
-    def get(self):
-        user_schema = UserSchema(many=True)
-        results = words_schema.dump(User.get_all()).data      
-        return results
-
 class AllPhrases(Resource):
     
     def get(self):
