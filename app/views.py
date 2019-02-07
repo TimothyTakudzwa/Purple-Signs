@@ -17,13 +17,9 @@ from flask_jwt import JWT
 
 jwt = JWT(app, authenticate, identity)
 
-api.add_resource(AllCourses, '/all_courses')
-api.add_resource(AllWords, '/all_words')
-api.add_resource(AllPhrases, '/all_phrases')
-api.add_resource(AllSections, '/all_sections/<int:id>')
-api.add_resource(UserRegister, '/register')
 
-paynow = Paynow('3519','04313a56-c9ec-426c-ad80-35de0a744b46', 'http://google.com', 'http://google.com')
+
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -107,21 +103,18 @@ def web():
 
 
 @app.route('/home', methods=['GET', 'POST'])
-def home():
-   
-        gid = request.args.get('id')
-
-       
-        print(gid)
-        course_schema = CourseSchema(many=True)
-        words_schema = WordsSchema(many=True)
-        phrase_schema = PhraseSchema(many=True)
-        courses = course_schema.dump(Course.query.all()).data
-        words = words_schema.dump(Content.query.all()).data
-        phrases = phrase_schema.dump(Phrases.query.all()).data
-        print(phrases)
-        return render_template('user.html', courses=courses, words=words, phrases=phrases)
-        
+def home():   
+    gid = request.args.get('id')       
+    print(gid)
+    course_schema = CourseSchema(many=True)
+    words_schema = WordsSchema(many=True)
+    phrase_schema = PhraseSchema(many=True)
+    courses = course_schema.dump(Course.query.all()).data
+    words = words_schema.dump(Content.query.all()).data
+    phrases = phrase_schema.dump(Phrases.query.all()).data
+    print(phrases)
+    return render_template('user.html', courses=courses, words=words, phrases=phrases)
+    
     
 
 

@@ -9,6 +9,7 @@ from flask_login import LoginManager
 from paynow import Paynow
 
 app = Flask(__name__)
+
 login_manager = LoginManager()
 db = SQLAlchemy(app)
 app.config.from_object('config')
@@ -32,3 +33,14 @@ app.config['BASIC_AUTH_PASSWORD'] = 'purple'
 basic_auth = BasicAuth(app)
 
 from . import views
+
+from .auth import auth
+from .api import api
+from .admin import admin
+from .web import web
+
+
+app.register_blueprint(auth)
+app.register_blueprint(admin)
+app.register_blueprint(api)
+app.register_blueprint(web)
