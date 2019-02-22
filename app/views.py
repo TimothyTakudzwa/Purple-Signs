@@ -107,10 +107,10 @@ def home():
     gid = request.args.get('id')       
     print(gid)
     course_schema = CourseSchema(many=True)
-    words_schema = WordsSchema(many=True)
+    words_schema = AlphabetSchema(many=True)
     phrase_schema = PhraseSchema(many=True)
     courses = course_schema.dump(Course.query.all()).data
-    words = words_schema.dump(Content.query.all()).data
+    words = words_schema.dump(Alphabet.query.all()).data
     phrases = phrase_schema.dump(Phrases.query.all()).data
     print(phrases)
     return render_template('user.html', courses=courses, words=words, phrases=phrases)

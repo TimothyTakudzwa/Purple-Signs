@@ -73,9 +73,10 @@ class Billing(db.Model):
         db.session.add(self)
         db.session.commit()
 
-class Content(db.Model):
+class Alphabet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200))
+    image_path = db.Column(db.String(200))
     file_name = db.Column(db.String(200), unique=True, index=True)
 
     def save(self):
@@ -83,18 +84,19 @@ class Content(db.Model):
         db.session.commit()
 
     def get_by_name(self, name):
-        return Content.query.all()
+        return Alphabet.query.all()
 
     @staticmethod
     def get_all():
-        return Content.query.all()
+        return Alphabet.query.all()
 
     def __repr__(self):
-        return "<Content: {} {} >".format(self.name, self.file_name)
+        return "<Alphabet: {} {} >".format(self.name, self.file_name)
 
 class Phrases(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     phrase = db.Column(db.String(200))
+    image_path = db.Column(db.String(200))
     file_name = db.Column(db.String(200), unique=True, index=True)
 
     def save(self):
@@ -109,12 +111,13 @@ class Phrases(db.Model):
         return Phrases.query.all()
 
     def __repr__(self):
-        return "<Content: {} {} >".format(self.name, self.file_name)
+        return "<Alphabet: {} {} >".format(self.name, self.file_name)
 
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200))
+    name = db.Column(db.String(200))  
+    description = db.Column(db.String(200))
     background_image = db.Column(db.String(200))
 
     def save(self):
@@ -158,10 +161,10 @@ class PhraseSchema(ma.ModelSchema):
         fields = ('id', 'phrase', 'file_name')
         model = Phrases
 
-class WordsSchema(ma.ModelSchema):
+class AlphabetSchema(ma.ModelSchema):
     class Meta:
         fields = ('id', 'name', 'file_name')
-        model = Content
+        model = Alphabet
 
 class SectionSchema(ma.ModelSchema):
     class Meta:
@@ -172,14 +175,6 @@ class UserSchema(ma.ModelSchema):
     class Meta:
         fields = ('id', 'name')
         model = Section
-
-
-class AllWords(Resource):
-    
-    def get(self):
-        words_schema = WordsSchema(many=True)
-        results = words_schema.dump(Content.get_all()).data      
-        return results
 
 class AllPhrases(Resource):
     
@@ -195,11 +190,3 @@ class AllSections(Resource):
         results = section_schema.dump(Section.find_by_course(id)).data       
         return results  
 
-class AllCourses(Resource):
-    
-    def get(self):
-        courses_schema = CourseSchema(many=True)
-        results = courses_schema.dump(Course.get_all()).data
-        print(results)
-        return results
-        

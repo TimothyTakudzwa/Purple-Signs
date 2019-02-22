@@ -28,6 +28,10 @@
   <link rel="stylesheet" type="text/css" href="/static/admin/vendors/css/prism.min.css">
   <link rel="stylesheet" type="text/css" href="/static/admin/vendors/css/chartist.min.css">
   <link rel="stylesheet" type="text/css" href="/static/admin/css/app.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  
+
+
 </head>
 
 <body data-col="2-columns" class=" 2-columns ">
@@ -97,8 +101,121 @@
       <div class="main-content">
         <div class="content-wrapper">
           <div class="container-fluid">
-          
-          
+            <!-- New Course Crd -->
+            <div class="col-xl-3 col-lg-6 col-12">
+              <div class="card gradient-light-blue-cyan">
+                <div class="card-body">
+                  <div class="px-3 py-3">
+                    <div class="media">
+                      <div class="align-center">
+                        <i class="icon-pencil text-white font-large-2 float-left"></i>
+                      </div>
+                      <div class="media-body text-white text-right">
+                        <h3 class="text-white">Courses</h3>
+                        <span >Add New Course</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!-- /New Course Crd -->
+          <div class="col-sm-12">
+              <div class="card">
+                  <div class="card-header">
+                          <div class="card-title-wrap bar-success">
+                      <h4 class="card-title">All Courses</h4>
+                          </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="card-block">
+                          <table class="table table-responsive-md text-center" id="courses"> 
+                              <thead>
+                                  <tr>
+                                      <th>Course ID</th>
+                                      <th>Course Name</th>
+                                      <th>Sub-sections</th>
+                                      <th>Created By</th>
+                                      
+                                      <th>Actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>1</td>
+                                      <td>
+                                          <div class="custom-control custom-checkbox m-0">
+                                              <input type="checkbox" class="custom-control-input" id="item1">
+                                              <label class="custom-control-label" for="item1"></label>
+                                          </div>
+                                      </td>
+                                      <td>Jean</td>
+                                      <td>Cartez</td>
+                                     
+                                      <td>
+                                          <a class="success p-0" data-original-title="" title="">
+                                              <i class="fa fa-pencil font-medium-3 mr-2"></i>
+                                          </a>
+                                          <a class="info p-0" data-original-title="" title="">
+                                              <i class="fa fa-check font-medium-3 mr-2"></i>
+                                          </a>
+                                          <a class="danger p-0" data-original-title="" title="">
+                                              <i class="fa fa-trash-o font-medium-3 mr-2"></i>
+                                          </a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>2</td>
+                                      <td>
+                                          <div class="custom-control custom-checkbox m-0">
+                                              <input type="checkbox" checked="" class="custom-control-input" id="item2">
+                                              <label class="custom-control-label" for="item2"></label>
+                                          </div>
+                                      </td>
+                                      <td>Pal</td>
+                                      <td>Patil</td>
+                                      
+                                      <td>
+                                          <a class="success p-0" data-original-title="" title="">
+                                              <i class="fa fa-pencil font-medium-3 mr-2"></i>
+                                          </a>
+                                          <a class="info p-0" data-original-title="" title="">
+                                              <i class="fa fa-check font-medium-3 mr-2"></i>
+                                          </a>
+                                          <a class="danger p-0" data-original-title="" title="">
+                                              <i class="fa fa-trash-o font-medium-3 mr-2"></i>
+                                          </a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>3</td>
+                                      <td>
+                                          <div class="custom-control custom-checkbox m-0">
+                                              <input type="checkbox" class="custom-control-input" id="item3">
+                                              <label class="custom-control-label" for="item3"></label>
+                                          </div>
+                                      </td>
+                                      <td>Jack</td>
+                                      <td>Rawn</td>
+                                   
+                                      <td>
+                                          <a class="success p-0" data-original-title="" title="">
+                                              <i class="fa fa-pencil font-medium-3 mr-2"></i>
+                                          </a>
+                                          <a class="info p-0" data-original-title="" title="">
+                                              <i class="fa fa-check font-medium-3 mr-2"></i>
+                                          </a>
+                                          <a class="danger p-0" data-original-title="" title="">
+                                              <i class="fa fa-trash-o font-medium-3 mr-2"></i>
+                                          </a>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
           </div>
         </div>
       </div>
@@ -112,6 +229,13 @@
  
   
   <script src="/static/admin/vendors/js/core/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+  <script>
+  $(document).ready( function () {
+    $('#courses').DataTable();
+} );
+  </script>
   <script src="/static/admin/vendors/js/core/popper.min.js"></script>
   <script src="/static/admin/vendors/js/core/bootstrap.min.js"></script>
   <script src="/static/admin/vendors/js/perfect-scrollbar.jquery.min.js"></script>
