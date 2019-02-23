@@ -37,7 +37,7 @@ class UserRegister(Resource):
             return {'message':'username already exists', }, 400
         else:
             
-            user = User(username=lower(data['username']),first_name=data['first_name'],surname=data['username'], phone=data['phone'], email=data['email'], 
+            user = User(username=data['username'],first_name=data['first_name'],surname=data['username'], phone=data['phone'], email=data['email'], 
                 password_hash=generate_password_hash(data['password']))
             user.save()
 

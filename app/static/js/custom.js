@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $("#basic1").click(function() {
-    $("#basic").fadeIn("slow");
+    $("#classes").fadeIn("slow");
     $("#jumbotron").hide();
     $("#carouselimages").hide();
     $("#dictionary_div").hide();
@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $("#greetings").click(function() {
-    $("#basic").fadeIn('slow');
+    $("#classes").fadeIn('slow');
     $("#jumbotron").hide();
     $("#carouselimages").hide();
     $("#videos").hide();
@@ -40,7 +40,7 @@ $(document).ready(function() {
     $("#jumbotron").hide();
     $("#carouselimages").hide();
     $("#dictionary_div").hide();
-    $("#basic").hide();
+    $("#classes").hide();
     $("#videos").hide();
     $("#courses").hide();
 
@@ -59,7 +59,7 @@ $(document).ready(function() {
     $("#carouselimages").hide();
     $("#dictionary_div").hide();
     $("#videos").hide();
-    $("#basic").hide();
+    $("#classes").hide();
     $("#courses").hide();
 
     $("#homepage").removeClass("active");
@@ -73,7 +73,7 @@ $(document).ready(function() {
 $(document).ready(function() {
   $("#homepage").click(function() {
     $("#jumbotron").fadeIn('slow');
-    $("#basic").hide();
+    $("#classes").hide();
     $("#carouselimages").fadeIn('slow');
     $("#dictionary_div").hide();
     $("#videos").hide();
@@ -92,7 +92,7 @@ $(document).ready(function() {
   $("#learning").click(function() {
     $("#dictionary_div").fadeIn('slow');
     $("#carouselimages").hide();
-    $("#basic").hide();
+    $("#classes").hide();
     $("#jumbotron").hide();
     $("#videos").hide();
     $("#dictionary").hide();
@@ -109,7 +109,7 @@ $(document).ready(function() {
 $(document).ready(function() {
   $("#dictionary1").click(function() {
     $("#dictionary_div").fadeIn('slow');
-    $("#basic").hide();
+    $("#classes").hide();
     $("#carouselimages").hide();
     $("#dictionary").hide();
     $("#videos").hide();
@@ -128,7 +128,8 @@ $(document).ready(function() {
 $(document).ready(function() {
   $("#courses_tab").click(function() {
     $("#courses").fadeIn('slow');
-    $("#basic").hide();
+    
+    $("#classes").hide();
     $("#dictionary").hide();
     $("#carouselimages").hide();
     $("#videos").hide();
@@ -146,7 +147,7 @@ $(document).ready(function() {
 $(document).ready(function() {
   $("#courses_tab1").click(function() {
     $("#courses").fadeIn('slow');
-    $("#basic").hide();
+    $("#classes").hide();
     $("#carouselimages").hide();
     $("#dictionary").hide();
     $("#constitution").hide();

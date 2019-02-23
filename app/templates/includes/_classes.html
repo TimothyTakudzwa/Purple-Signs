@@ -1,0 +1,33 @@
+<div class="row" id="classes" style="display:none">
+    <div class="col-lg-12 col-md-12">
+        <div class="card" style="background-image: url(http://www.iec.gov.br/portal/wp-content/uploads/2015/01/white-wallpaper-pattern.jpg);">
+            <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons"></i>
+                </div>
+                <h4 class="card-title">Basic Words</h4>
+            </div>
+            <div class="card-body">
+                <div class="col-lg-12 row">
+                    <br /><br /> {%if classes %} {% for class in classes %}
+
+                    
+
+
+                    <div class="col-lg-3 " style="margin-top:20px;">
+                        
+                        <div class="hovereffect">
+                            <img class="img-responsive" width="50px" height="150px"src="{{ class.background_image }}" alt="">
+                            <div class="overlay">
+                                    <h2 style="color:black; background-color: rgba(255, 255, 255, 0.479)"><b>{{ class.name }}</b></h2>
+                                <a class="info" href="#">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %} {% else %} {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

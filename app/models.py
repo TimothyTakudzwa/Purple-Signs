@@ -150,11 +150,33 @@ class Section(db.Model):
     def get_all():
         return Section.query.all()
 
+class Classes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200))
+    background_image = db.Column(db.String(200))
+    
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @staticmethod
+    def find_by_course(id):
+            return Classes.query.filter_by(id=id).all()
+
+    @staticmethod
+    def get_all():
+        return Classes.query.all()
 
 class CourseSchema(ma.ModelSchema):
     class Meta:
         fields = ('id', 'name', 'background_image')
         model = Course
+
+class ClassSchema(ma.ModelSchema):
+    class Meta:
+        fields = ('id', 'name', 'background_image')
+        model = Classes
 
 class PhraseSchema(ma.ModelSchema):
     class Meta:

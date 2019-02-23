@@ -108,12 +108,14 @@ def home():
     print(gid)
     course_schema = CourseSchema(many=True)
     words_schema = AlphabetSchema(many=True)
+    class_schema = ClassSchema(many=True)
     phrase_schema = PhraseSchema(many=True)
+    classes = class_schema.dump(Classes.query.all()).data
     courses = course_schema.dump(Course.query.all()).data
     words = words_schema.dump(Alphabet.query.all()).data
     phrases = phrase_schema.dump(Phrases.query.all()).data
-    print(phrases)
-    return render_template('user.html', courses=courses, words=words, phrases=phrases)
+   
+    return render_template('user.html', courses=courses, words=words, phrases=phrases, classes=classes)
     
     
 
