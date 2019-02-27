@@ -16,6 +16,64 @@ $(document).ready(function() {
   });
 });
 
+
+// Play Video 
+$(document).ready(function() {
+  var t = $('#example').DataTable();
+  
+  var counter = 1;
+  $(".play_video").click(function() {
+    t.clear();
+    id = $(this).data("id")
+    
+    $.ajax({
+     
+      type: "GET",
+      dataType: "json",
+     
+      url: "http://127.0.0.1:5000/api/phrase/" + id
+    }).done(function(response) {
+      if (response.error) {
+      } else {
+        if (response.message == "failed") {
+          console.log("error");
+        } else {
+          console.log(response);
+          $.each(response, function(i, item) {
+            $("#classes").hide();
+            $("#basic").show();
+            var node = item.file_name;
+            t.row.add( [
+              '<a style="cursor: pointer;" onClick="gotoNode("'+ node +'")">'+item.phrase+'</a>'
+            
+          ] ).draw( false );
+   
+            console.log(item.id)
+          });
+        }
+      }
+    });
+
+
+    // $("#classes").fadeIn('slow');
+    // $("#jumbotron").hide();
+    // $("#carouselimages").hide();
+    // $("#videos").hide();
+    // $("#dictionary_div").hide();
+    // $("#constitution").hide();
+    // $("#courses").hide();
+
+    // $("#homepage").removeClass("active");
+    // $("#learning").removeClass("active");
+    // $("#constitution_tab").removeClass("active");
+    // $("#courses_tab").removeClass("active");
+    // $("#greetings").addClass("active");
+  });
+});
+// <? Play Video ?> 
+
+
+
 $(document).ready(function() {
   $("#greetings").click(function() {
     $("#classes").fadeIn('slow');

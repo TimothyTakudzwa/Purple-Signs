@@ -82,30 +82,10 @@ def login():
     print("------------------------", current_user)
     return render_template('login-5.html')
 
-@app.route('/web_auth', methods=['POST', 'GET'])
-def web():
-    data = request.get_json()
-    username =data['username']
-    password =data['password']  
-     
-    user = User.get_by_username(username)
-    print(username)
-    print(password)
-    if user is not None and user.check_password(password):
-        print(user.id)
-        return  jsonify( id=user.id )
-
-    else : 
-        print("incorrect Password or email")
-        return  jsonify( id=0)
-
-
 
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():   
-    gid = request.args.get('id')       
-    print(gid)
     course_schema = CourseSchema(many=True)
     words_schema = AlphabetSchema(many=True)
     class_schema = ClassSchema(many=True)
@@ -118,71 +98,3 @@ def home():
     return render_template('user.html', courses=courses, words=words, phrases=phrases, classes=classes)
     
     
-
-
-@app.route('/admin/save_course', methods=['GET', 'POST'])
-def save():
-    course_name = request.form['course_name']
-    new_course = Course(name=course_name)
-    new_course.save()
-    return render_template('login-5.html')
-
-
-@app.route('/get_courses')
-def courses():
-    courses_schema = CourseSchema(many=True)
-    result = courses_schema.dump(Course.get_all()).data
-    print(Course.get_all())
-    return jsonify(result)
-
-
-@app.route('/admin/upload_content', methods=['GET', 'POST'])
-@basic_auth.required
-def upload_content():
-    if request.method == 'POST':
-        section_name = request.form['section_name']
-        course_id = request.form['course_id']
-
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            new_section = Section(
-                course_id=course_id, section_name=section_name, file_name=filename)
-            new_section.save()
-            flash('Content successfully added!')
-            return render_template('add_content.html')
-    else:
-        return render_template('add_content.html')
-
-
-@app.route('/admin/upload_alphabet', methods=['GET', 'POST'])
-def upload_alphabet():
-    if request.method == 'POST':
-        word = request.form['word']
-
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            new_phrase = Content(
-                name=word, file_name=filename)
-            new_phrase.save()
-            flash('Content successfully added!')
-            return render_template('add_content.html')
-    else:
-        return render_template('add_content.html')

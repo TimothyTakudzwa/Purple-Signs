@@ -97,14 +97,15 @@ class Phrases(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     phrase = db.Column(db.String(200))
     image_path = db.Column(db.String(200))
+    class_id = db.Column(db.Integer)
     file_name = db.Column(db.String(200), unique=True, index=True)
 
     def save(self):
         db.session.add(self)
         db.session.commit()
 
-    def get_by_name(self, name):
-        return Phrases.query.all()
+    def get_by_id(id):
+       return Phrases.query.filter_by(class_id=id).all()
 
     @staticmethod
     def get_all():

@@ -1,13 +1,21 @@
 from flask_restful import Resource, reqparse
 from flask.views import MethodView
-from ..models import PhraseSchema, Phrases   
+from ..models import ClassSchema, Classes   
 
-class PhraseAPI(Resource):
+class ClassAPI(Resource):
     parser = reqparse.RequestParser()
+    parser.add_argument('name',
+        type=str,
+        required=True,
+        help="This field cannot be left blank"
+    )
 
-    def get(self, id):
-        phrase_schema = PhraseSchema(many=True)       
-        results = phrase_schema.dump(Phrases.get_by_id(id)).data
+    parser.add_argument('image_path', type=str, help='Rate to charge for this resource')
+    
+      
+    def get(self):
+        class_schema = ClassSchema(many=True)
+        results = class_schema.dump(Classes.get_all()).data
         print(results)
         return results        
 
