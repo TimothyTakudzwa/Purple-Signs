@@ -31,8 +31,12 @@ class AlphabetAPI(Resource):
             course_name = data['name']
             file_name = data['file_name']
             image_path = data['image_path']
-            new_course = Alphabet(name=course_name, file_name=file_name, image_path=image_path)
-            new_course.save()
+
+            # Save course in db with filename as the key for accessing the file from S3  
+            new_course = Alphabet(name=course_name, file_name=file_name)             
+            new_course.save()            
+            #Upload file to S3             
+            s3.upload_file(image_path, bucket_name, file_name)
             return {'message': "Alphabet Word Added Succesfully"}, 200
         except:
             return {'message': " An error occured inserting the item."}, 500
