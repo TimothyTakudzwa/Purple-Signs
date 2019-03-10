@@ -31,7 +31,7 @@ $(document).ready(function() {
       type: "GET",
       dataType: "json",
 
-      url: "http://127.0.0.1:5000/api/phrase/" + id
+      url: "http://purple-sign.herokuapp.com/api/phrase/" + id
     }).done(function (response) {
       if (response.error) {
       } else {
