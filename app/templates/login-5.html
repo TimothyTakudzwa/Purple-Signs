@@ -110,9 +110,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<h3 class="m-login__title">
 								Login To Your Account<br/>
 								<br/>
-								<a href="/authorize/facebook" class="btn btn-danger" style="background-color:#3b5998; border:#3b5998 1px solid"><i
-									 href="#" class="fa fa-facebook" style="color:white"></i>
-									&nbsp; Continue with Facebook</a>
+								
 							</h3>
 
 						</div>
@@ -283,7 +281,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					data: data_json,
 					contentType: "application/json",
 					type: "POST",
-					url: "http://127.0.0.1:5000/auth/web_auth"
+					url: "/auth/web_auth"
 				}).done(function (data) {
 					if (data.error) {
 						console.log(data)
@@ -318,7 +316,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				$.ajax({
 					data: data,
 					type: "POST",
-					url: "http://127.0.0.1:5000/register",
+					url: "/register",
 					complete: function (response) {
 						if (response.status == 201) {
 							console.log("201");
@@ -354,7 +352,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				$.ajax({
 					data: data,
 					type: "POST",
-					url: "http://127.0.0.1:5000/pay",
+					url: "/pay",
 					complete: function (response) {
 						if (response.status == 201) {
 							console.log("201");

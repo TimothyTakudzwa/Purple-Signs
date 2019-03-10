@@ -31,7 +31,7 @@ $(document).ready(function() {
       type: "GET",
       dataType: "json",
 
-      url: "http://purple-sign.herokuapp.com/api/phrase/" + id
+      url: "http://purple-sign.herokuapp.com/api/videos/" + id
     }).done(function (response) {
       if (response.error) {
       } else {
