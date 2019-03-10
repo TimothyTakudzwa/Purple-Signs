@@ -46,7 +46,7 @@ $(document).ready(function() {
             t.row.add([
               '<a style="cursor: pointer;" onClick="gotoNode(\''+node+'\')">'+item.phrase+'</a>',
               '<span>View Image </span>',
-              '<span>Play Vide </span>'
+              '<a style="cursor: pointer;" onClick="gotoNode(\''+node+'\')">Play Video</a>'
 
             ]).draw(false);
 

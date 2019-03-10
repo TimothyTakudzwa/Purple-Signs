@@ -10,7 +10,7 @@
       type: "GET",
       dataType: "json",
 
-      url: "../api/phrase/" + id
+      url: "../api/videos/" + id
     }).done(function (response) {
       if (response.error) {
       } else {
@@ -25,7 +25,7 @@
             t.row.add([
               '<a style="cursor: pointer;" onClick="gotoNode(\''+node+'\')">'+item.phrase+'</a>',
               '<span>View Image </span>',
-              '<span>Play Vide </span>'
+              '<a style="cursor: pointer;" onClick="gotoNode(\''+node+'\')">Play Video</a>'
 
             ]).draw(false);
 
