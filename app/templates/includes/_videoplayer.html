@@ -1,10 +1,49 @@
+<script>
+    function timmy() {
+
+        var t = $('#example').DataTable();
+         t.clear();
+    id = $("#back_button").data("id")
+   $("#videos").hide();
+    $.ajax({
+
+      type: "GET",
+      dataType: "json",
+
+      url: "http://127.0.0.1:5000/api/phrase/" + id
+    }).done(function (response) {
+      if (response.error) {
+      } else {
+        if (response.message == "failed") {
+          console.log("error");
+        } else {
+          console.log(response);
+          $.each(response, function (i, item) {
+            $("#classes").hide();
+            $("#basic").show();
+            var node = item.file_name;
+            t.row.add([
+              '<a style="cursor: pointer;" onClick="gotoNode(\''+node+'\')">'+item.phrase+'</a>',
+              '<span>View Image </span>',
+              '<span>Play Vide </span>'
+
+            ]).draw(false);
+
+            console.log(item.id)
+          });
+        }
+      }
+    });
+        }
+</script>
+
 <div id="videos" style="display:none">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header card-header-primary card-header-icon">
-                    <div class="card-icon">
-                        <i class="material-icons">assignment</i>
+                    <div class="card-icon" onclick="timmy()" id="back_button"style="cursor: pointer">
+                        <i class="material-icons" >reply</i>
                     </div>
                     <h4 class="card-title">Video</h4>
                 </div>

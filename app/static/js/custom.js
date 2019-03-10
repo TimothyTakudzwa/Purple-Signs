@@ -7,7 +7,7 @@ $(document).ready(function() {
     $("#constitution").hide();
     $("#videos").hide();
     $("#courses").hide();
-
+    $("#basic").hide();
     $("#homepage").removeClass("active");
     $("#learning").removeClass("active");
     $("#constitution_tab").removeClass("active");
@@ -25,29 +25,31 @@ $(document).ready(function() {
   $(".play_video").click(function() {
     t.clear();
     id = $(this).data("id")
-    
+    $("#back_button").attr("data-id", id);
     $.ajax({
-     
+
       type: "GET",
       dataType: "json",
-     
+
       url: "http://127.0.0.1:5000/api/phrase/" + id
-    }).done(function(response) {
+    }).done(function (response) {
       if (response.error) {
       } else {
         if (response.message == "failed") {
           console.log("error");
         } else {
           console.log(response);
-          $.each(response, function(i, item) {
+          $.each(response, function (i, item) {
             $("#classes").hide();
             $("#basic").show();
             var node = item.file_name;
-            t.row.add( [
-              '<a style="cursor: pointer;" onClick="gotoNode("'+ node +'")">'+item.phrase+'</a>'
-            
-          ] ).draw( false );
-   
+            t.row.add([
+              '<a style="cursor: pointer;" onClick="gotoNode(\''+node+'\')">'+item.phrase+'</a>',
+              '<span>View Image </span>',
+              '<span>Play Vide </span>'
+
+            ]).draw(false);
+
             console.log(item.id)
           });
         }
@@ -83,7 +85,7 @@ $(document).ready(function() {
     $("#dictionary_div").hide();
     $("#constitution").hide();
     $("#courses").hide();
-
+    $("#basic").hide();
     $("#homepage").removeClass("active");
     $("#learning").removeClass("active");
     $("#constitution_tab").removeClass("active");
@@ -101,7 +103,7 @@ $(document).ready(function() {
     $("#classes").hide();
     $("#videos").hide();
     $("#courses").hide();
-
+    $("#basic").hide();
     $("#homepage").removeClass("active");
     $("#greetings").removeClass("active");
     $("#courses_tab").removeClass("active");
@@ -119,7 +121,7 @@ $(document).ready(function() {
     $("#videos").hide();
     $("#classes").hide();
     $("#courses").hide();
-
+    $("#basic").hide();
     $("#homepage").removeClass("active");
     $("#greetings").removeClass("active");
     $("#courses_tab").removeClass("active");
@@ -130,14 +132,14 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $("#homepage").click(function() {
-    $("#jumbotron").fadeIn('slow');
+    $("#videos").fadeIn('slow');
     $("#classes").hide();
     $("#carouselimages").fadeIn('slow');
     $("#dictionary_div").hide();
     $("#videos").hide();
     $("#constitution").hide();
     $("#courses").hide();
-
+    $("#basic").hide();
     $("#learning").removeClass("active");
     $("#constitution_tab").removeClass("active");
     $("#greetings").removeClass("active");
@@ -156,7 +158,7 @@ $(document).ready(function() {
     $("#dictionary").hide();
     $("#constitution").hide();
     $("#courses").hide();
-
+    $("#basic").hide();
     $("#homepage").removeClass("active");
     $("#greetings").removeClass("active");
     $("#constitution_tab").removeClass("active");
@@ -174,7 +176,7 @@ $(document).ready(function() {
     $("#constitution").hide();
     $("#jumbotron").hide();
     $("#courses").hide();
-
+    $("#basic").hide();
     $("#homepage").removeClass("active");
     $("#greetings").removeClass("active");
     $("#constitution_tab").removeClass("active");
@@ -193,7 +195,7 @@ $(document).ready(function() {
     $("#videos").hide();
     $("#constitution").hide();
     $("#jumbotron").hide();
-
+    $("#basic").hide();
     $("#homepage").removeClass("active");
     $("#learning").removeClass("active");
     $("#greetings").removeClass("active");
@@ -211,7 +213,7 @@ $(document).ready(function() {
     $("#constitution").hide();
     $("#videos").hide();
     $("#jumbotron").hide();
-
+    $("#basic").hide();
     $("#homepage").removeClass("active");
     $("#learning").removeClass("active");
     $("#greetings").removeClass("active");
