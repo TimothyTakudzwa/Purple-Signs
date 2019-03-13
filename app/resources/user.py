@@ -32,7 +32,7 @@ class UserRegister(Resource):
 
     def post(self):
         data = UserRegister.parser.parse_args()
-        print(data)
+      
         username = data['username'].lower()
         if User.find_by_username(data['username']):
             return {'message':'username already exists', }, 400
@@ -45,3 +45,26 @@ class UserRegister(Resource):
             user.save()
 
             return {'message': 'user created succesfully'}, 201 
+
+class LoginRegister(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('username',
+        type=str,
+        
+        help="This field cannot be left blank")
+    parser.add_argument('password',
+        type=str,
+        
+        help="this field cannot be left blank")
+        
+    def post(self):
+        data = UserRegister.parser.parse_args()      
+        username = data['username'].lower()
+        user = User.find_by_username(username)
+        if user is not None and user.check_password(data['password']):
+            return {'status':1, 'paid' : user.paid }, 200
+        else: 
+            return {'status':0, 'paid' : False }, 400
+        # else:
+        #     return {'message':'User has no account' }, 400
+        
