@@ -1,76 +1,54 @@
 import os
 
-from flask import render_template, request, json, url_for, flash, redirect, jsonify
-from werkzeug.utils import secure_filename
-from . import app, db, forms, basic_auth,api, login_manager, paynow
-from .security import authenticate, identity
+from flask import (flash, json, jsonify, redirect, render_template, request,
+                   url_for)
+from flask_jwt import JWT
 from flask_login import current_user
+from flask_restful import Api, Resource
+from paynow import Paynow
+from rauth import OAuth2Service
+from werkzeug.utils import secure_filename
+
+from . import api, app, basic_auth, db, forms, login_manager, paynow
+from .helper_functions import ServerResponse, allowed_file
 from .models import *
 from .models import User
 from .oauth import *
-from rauth import OAuth2Service
 from .resources.user import UserRegister
-from .helper_functions import ServerResponse, allowed_file
-from flask_restful import Resource, Api
-from paynow import Paynow
-from flask_jwt import JWT
+from .security import authenticate, identity
 
 jwt = JWT(app, authenticate, identity)
-
-
-
 
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.get(user_id)
 
-@app.route('/authorize/<provider>')
-def oauth_authorize(provider):
-    if not current_user.is_anonymous:
-        return redirect(url_for('index'))
-    oauth = OAuthSignIn.get_provider(provider)
-    return oauth.authorize()
 
-@app.route('/callback/<provider>')
-def oauth_callback(provider):
-    if not current_user.is_anonymous:
-        return redirect(url_for('home'))
-    oauth = OAuthSignIn.get_provider(provider)
-    social_id, username, email= oauth.callback()
-    if social_id is None:
-        flash('Authentication failed.')
-        return redirect(url_for('index'))
-    print("=============== Social ID=================", social_id, username, email)
-    user = User.get_by_social_id(social_id)
-    if user:
-        print("========================= User =============", user)
-        return redirect(url_for('home'))
-    # def signup():
-    else: 
-    
-        user = User(social_id=social_id, username=username, email=email)
-        user.save()       
-        print("========================= User =============", user)
-        return redirect(url_for('home'))
-    
-   
 
 @app.route('/pay', methods=['POST', 'GET'])
 def pay():
-    phone_number = request.form.get('phone_number')
+    data = request.get_json()   
+
+    phone_number = data['phone_number']
    
-    print("Phone Number", phone_number)
     payment = paynow.create_payment('Order', 'test@example.com')
-    payment.add('Payment for stuff', '1')
-    response = paynow.send_mobile(payment, phone_number, 'ecocash') 
+
+    payment.add('Payment for stuff', 1)
+
+    response = paynow.send_mobile(payment, '0774231343', 'ecocash')
+
+    print("Payment Status: ", response.status.error)
     if(response.success):
-        poll_url = response.poll_url        
-        status = paynow.check_transaction_status(poll_url)        
-        created = status.status
-        if(status == 'created' ):
-            print("Created")
-        print("Payment Status: ", created)
+        poll_url = response.poll_url
+
+        print("Poll Url: ", poll_url)
+
+        status = paynow.check_transaction_status(poll_url)
+
+        time.sleep(30)
+
+        print("Payment Status: ", status.status)
     return ''
 
 @app.route('/')
@@ -96,5 +74,3 @@ def home():
     phrases = phrase_schema.dump(Phrases.query.all()).data
    
     return render_template('user.html', courses=courses, words=words, phrases=phrases, classes=classes)
-    
-    
