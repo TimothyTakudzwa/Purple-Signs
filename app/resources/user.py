@@ -61,11 +61,13 @@ class LoginRegister(Resource):
     def post(self):
         data = UserRegister.parser.parse_args()      
         username = data['username'].lower()
-       
+        user = User.find_by_username(username)
         if user is not None and user.check_password(data['password']):
-            return {'status':1, 'paid' : user.paid }, 200
+            return {'status':1, 'paid' : user.paid, 'id' : user.id }, 200
+        elif user is None:
+            return {'status':0, 'paid' : False, 'id' : 0 }, 200
         else: 
-            return {'status':0, 'paid' : False }, 400
+            return {'status':0, 'paid' : False, 'id' : user.id }, 200
         # else:
         #     return {'message':'User has no account' }, 400
     
@@ -83,4 +85,4 @@ class CheckPayment(Resource):
         if user is not None:
             return {'status':1, 'paid' : user.paid }, 200
         else: 
-            return {'status':0, 'paid' : False }, 400
+            return {'status':0, 'paid' : False }, 200

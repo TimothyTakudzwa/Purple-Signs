@@ -76,6 +76,13 @@ class Billing(db.Model):
     @staticmethod
     def get_by_id(id):
         return Billing.query.filter_by(user_id=id).first()
+    
+    @staticmethod
+    def update_payment(id, poll_url):
+        user=Billing.query.filter_by(user_id=id).first()
+        user.poll_url = poll_url
+        user.save()
+        return '' 
 
 class Alphabet(db.Model):
     id = db.Column(db.Integer, primary_key=True)

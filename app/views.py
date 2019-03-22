@@ -36,15 +36,15 @@ def pay():
     response = paynow.send_mobile(payment, phone_number, 'ecocash')
 
     if(response.success):
-        poll_url = response.poll_url  
-        print("Poll Url: ", poll_url)   
+        poll_url = response.poll_url          
         time.sleep(30)   
         status = paynow.check_transaction_status(poll_url)             
         if (status.status=='paid'):
-            paid = True
-            User.update_payment(user_id, paid)
-            billing = Billing(user_id=user_id,poll_url=poll_url,amount=1)
-            billing.save()       
+            paid=False
+            update_payment_status(user_id, paid, poll_url)
+        if (status.status=='sent'):
+            paid=False
+            update_payment_status(user_id, paid, poll_url)
         return jsonify({'status':status.status }), 200
     return jsonify({'status':0 }), 400
 
@@ -52,16 +52,20 @@ def pay():
 def check():
     data = request.get_json()
     user_id = data['id']  
-    user = Billing.get_by_id(user_id)
-    print("User: ", user.poll_url)
-    poll_url = user.poll_url
-    status = paynow.check_transaction_status(poll_url)             
-    if (status.status=='paid'):
-        paid = True
-        User.update_payment(user_id, paid)
-        billing = Billing(user_id=user_id,poll_url=poll_url,amount=1)
-        billing.save()       
-    return jsonify({'status':status.status }), 200       
+    try:
+        user = Billing.get_by_id(user_id)
+        print("User: ", user.poll_url)
+        poll_url = user.poll_url
+        status = paynow.check_transaction_status(poll_url)             
+        if (status.status=='paid'):
+            paid = True
+            User.update_payment(user_id, paid)
+            billing = Billing(user_id=user_id,poll_url=poll_url,amount=1)
+            billing.save()       
+        return jsonify({'status':status.status }), 200 
+    except:
+        return jsonify({'status':0 }), 200
+
 
 @app.route('/')
 def index():    
@@ -86,3 +90,12 @@ def home():
     phrases = phrase_schema.dump(Phrases.query.all()).data
    
     return render_template('user.html', courses=courses, words=words, phrases=phrases, classes=classes)
+
+def update_payment_status(user_id, paid, poll_url):    
+    User.update_payment(user_id, paid)
+    user = Billing.get_by_id(user_id)
+    if user is None:
+        billing = Billing(user_id=user_id,poll_url=poll_url,amount=1)
+        billing.save() 
+    else: 
+        Billing.update_payment(user_id, poll_url)        
