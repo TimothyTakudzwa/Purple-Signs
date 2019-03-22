@@ -18,10 +18,10 @@ login_manager.init_app(app)
 api = Api(app)
 CORS(app)
 paynow = Paynow(
-    '6389', 
-    '8db834f2-8a94-40a5-a716-e3f5bbfe4a37',
-    'http://google.com', 
-    'http://google.com'
+    '7121', 
+    '0fbc8fd5-2624-474f-8752-10ff4ee2d463',
+    'https://www.google.com', 
+    'httpw://www.google.com'
 )
 
 

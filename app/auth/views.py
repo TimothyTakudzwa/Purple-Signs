@@ -2,11 +2,12 @@ from . import auth
 from ..import  api
 from flask import render_template
 from ..models import *
-from ..resources.user import UserRegister, LoginRegister
+from ..resources.user import UserRegister, LoginRegister, CheckPayment
 from flask import render_template, request, json, url_for, flash, redirect, jsonify
 
 api.add_resource(UserRegister, '/register')
 api.add_resource(LoginRegister, '/login')
+api.add_resource(CheckPayment, '/check_payment')
 
 @auth.route('/login', methods=["GET", "POST"])
 def login():

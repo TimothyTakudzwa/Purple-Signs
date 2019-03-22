@@ -43,8 +43,9 @@ class UserRegister(Resource):
             user = User(username=username,first_name=data['first_name'],surname=data['surname'], phone=data['phone'], email=data['email'], 
                 password_hash=generate_password_hash(data['password']), paid=False)
             user.save()
-
-            return {'message': 'user created succesfully'}, 201 
+            user = User.find_by_username(username)
+            user_id = user.id        
+            return {'message': 'user created succesfully', 'id': user_id}, 201 
 
 class LoginRegister(Resource):
     parser = reqparse.RequestParser()
@@ -60,11 +61,26 @@ class LoginRegister(Resource):
     def post(self):
         data = UserRegister.parser.parse_args()      
         username = data['username'].lower()
-        user = User.find_by_username(username)
+       
         if user is not None and user.check_password(data['password']):
             return {'status':1, 'paid' : user.paid }, 200
         else: 
             return {'status':0, 'paid' : False }, 400
         # else:
         #     return {'message':'User has no account' }, 400
+    
+class CheckPayment(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('username',
+        type=str,
         
+        help="This field cannot be left blank")
+           
+    def post(self):
+        data = UserRegister.parser.parse_args()      
+        username = data['username'].lower()
+        user = User.find_by_username(username)
+        if user is not None:
+            return {'status':1, 'paid' : user.paid }, 200
+        else: 
+            return {'status':0, 'paid' : False }, 400

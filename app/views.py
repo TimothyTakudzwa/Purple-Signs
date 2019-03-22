@@ -8,7 +8,7 @@ from flask_restful import Api, Resource
 from paynow import Paynow
 from rauth import OAuth2Service
 from werkzeug.utils import secure_filename
-
+import time 
 from . import api, app, basic_auth, db, forms, login_manager, paynow
 from .helper_functions import ServerResponse, allowed_file
 from .models import *
@@ -29,27 +29,39 @@ def load_user(user_id):
 @app.route('/pay', methods=['POST', 'GET'])
 def pay():
     data = request.get_json()   
-
     phone_number = data['phone_number']
-   
-    payment = paynow.create_payment('Order', 'test@example.com')
-
+    user_id = data['id']   
+    payment = paynow.create_payment('Subscription Payment', 'admin@purplesigns.co.zw')
     payment.add('Payment for stuff', 1)
+    response = paynow.send_mobile(payment, phone_number, 'ecocash')
 
-    response = paynow.send_mobile(payment, '0774231343', 'ecocash')
-
-    print("Payment Status: ", response.status.error)
     if(response.success):
-        poll_url = response.poll_url
+        poll_url = response.poll_url  
+        print("Poll Url: ", poll_url)   
+        time.sleep(30)   
+        status = paynow.check_transaction_status(poll_url)             
+        if (status.status=='paid'):
+            paid = True
+            User.update_payment(user_id, paid)
+            billing = Billing(user_id=user_id,poll_url=poll_url,amount=1)
+            billing.save()       
+        return jsonify({'status':status.status }), 200
+    return jsonify({'status':0 }), 400
 
-        print("Poll Url: ", poll_url)
-
-        status = paynow.check_transaction_status(poll_url)
-
-        time.sleep(30)
-
-        print("Payment Status: ", status.status)
-    return ''
+@app.route('/check_transaction', methods=['POST', 'GET'])
+def check():
+    data = request.get_json()
+    user_id = data['id']  
+    user = Billing.get_by_id(user_id)
+    print("User: ", user.poll_url)
+    poll_url = user.poll_url
+    status = paynow.check_transaction_status(poll_url)             
+    if (status.status=='paid'):
+        paid = True
+        User.update_payment(user_id, paid)
+        billing = Billing(user_id=user_id,poll_url=poll_url,amount=1)
+        billing.save()       
+    return jsonify({'status':status.status }), 200       
 
 @app.route('/')
 def index():    
