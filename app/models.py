@@ -71,6 +71,7 @@ class Billing(db.Model):
     date_billed = db.Column(db.Date)
     user_id = db.Column(db.Integer)
     poll_url = db.Column(db.String(2000))
+    status= db.Column(db.String(200))
     amount = db.Column(db.Float)
 
     def save(self):

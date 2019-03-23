@@ -41,10 +41,10 @@ def pay():
         status = paynow.check_transaction_status(poll_url)             
         if (status.status=='paid'):
             paid=False
-            update_payment_status(user_id, paid, poll_url)
+            update_payment_status(user_id, paid, poll_url, status.status)
         if (status.status=='sent'):
             paid=False
-            update_payment_status(user_id, paid, poll_url)
+            update_payment_status(user_id, paid, poll_url , status.status)
         return jsonify({'status':status.status }), 200
     return jsonify({'status':0 }), 400
 
@@ -60,7 +60,7 @@ def check():
         if (status.status=='paid'):
             paid = True
             User.update_payment(user_id, paid)
-            billing = Billing(user_id=user_id,poll_url=poll_url,amount=1)
+            billing = Billing(user_id=user_id,poll_url=poll_url,amount=1, status=status.status)
             billing.save()       
         return jsonify({'status':status.status }), 200 
     except:
@@ -105,11 +105,11 @@ def home():
    
     return render_template('user.html', courses=courses, words=words, phrases=phrases, classes=classes)
 
-def update_payment_status(user_id, paid, poll_url):    
+def update_payment_status(user_id, paid, poll_url, status):    
     User.update_payment(user_id, paid)
     user = Billing.get_by_id(user_id)
     if user is None:
-        billing = Billing(user_id=user_id,poll_url=poll_url,amount=1)
+        billing = Billing(user_id=user_id,poll_url=poll_url,amount=1,status=status)
         billing.save() 
     else: 
         Billing.update_payment(user_id, poll_url)        
