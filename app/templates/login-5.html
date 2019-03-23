@@ -279,8 +279,8 @@ License: You must have a valid license purchased only from themeforest(the above
 						</div>
 						<div class="form-group">
 							It seems like your transaction was created but you did not enter pin. If you have please
-							verify payment<br />
-							<button class="btn btn-primary verify_payment">Check My Payment</button>
+							check payment periodically<br />
+							
 						</div>
 					</div>
 					<div id="message_error" style="display:none">
@@ -290,9 +290,10 @@ License: You must have a valid license purchased only from themeforest(the above
 						<div class="form-group">
 							The Transaction Failed!!! Maybe because of duplicate transactions or insufficient
 							funds<br />
-							<button class="btn btn-primary verify_payment">Check My Payment</button>
+						
 						</div>
 					</div>
+
 					<div id="message_paid" style="display:none">
 						<div class="form-group">
 							<h3>Success!!</h3>
@@ -308,12 +309,12 @@ License: You must have a valid license purchased only from themeforest(the above
 								placeholder="Enter Ecocash Number">
 						</div>
 						<div class="form-group">
-							After Clicking Submit Check your phone with the number you entered for a payment popup
+							After Clicking Submit Check your phone with the number you entered for a payment popup. If you have paid please click on check payment
 						</div>
 
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="button" id="make_payment" class="btn btn-primary">Make Payment</button>
+						<div class="modal-footer col-sm-12">
+							<button type="button" class="btn btn-danger verify_payment col">Check Payment</button>
+							<button type="button" id="make_payment" class="btn btn-primary col">Make Payment</button>
 						</div>
 					</div>
 				</div>
@@ -456,6 +457,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					$("#bottom_div").hide();
 					$("#initial").hide();
 					$("#message_cancelled").hide();
+					window.location = '/home'
 					
 
 				}

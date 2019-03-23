@@ -84,13 +84,13 @@ def users():
 
 
 
-# @app.route('/update_payment')
-# def payment():
-#     data = request.get_json()
-#     user_id = data['id']  
-#     user_id = data['id']  
-
-#     return  jsonify(users)
+@app.route('/update_payment')
+def payment():
+    data = request.get_json()
+    user_id = data['id']  
+    paid = data['paid']  
+    User.update_payment(user_id, paid)
+    return  ''
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():   

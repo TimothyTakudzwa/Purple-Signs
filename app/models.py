@@ -61,6 +61,7 @@ class User(db.Model, UserMixin):
     @staticmethod
     def update_payment(id, paid):
         user=User.query.filter_by(id=id).first()
+        print(user)
         user.paid = paid
         user.save()
         return '' 
