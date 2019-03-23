@@ -37,7 +37,7 @@ def pay():
 
     if(response.success):
         poll_url = response.poll_url          
-        time.sleep(30)   
+        time.sleep(15)   
         status = paynow.check_transaction_status(poll_url)             
         if (status.status=='paid'):
             paid=False
