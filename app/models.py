@@ -215,7 +215,7 @@ class SectionSchema(ma.ModelSchema):
 
 class UserSchema(ma.ModelSchema):
     class Meta:
-        fields = ('id', 'first_name')
+        fields = ('id', 'poll_url', 'user_id')
         model = User
 
 class BillingSchema(ma.ModelSchema):

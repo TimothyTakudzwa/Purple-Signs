@@ -79,9 +79,18 @@ def login():
 @app.route('/get_users')
 def users():
     user_schema = UserSchema(many=True)
-    users = user_schema.dump(User.query.all()).data
-    
+    users = user_schema.dump(Billing.query.all()).data    
     return  jsonify(users)
+
+
+
+# @app.route('/update_payment')
+# def payment():
+#     data = request.get_json()
+#     user_id = data['id']  
+#     user_id = data['id']  
+
+#     return  jsonify(users)
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():   
