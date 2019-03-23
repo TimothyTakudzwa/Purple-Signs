@@ -76,7 +76,12 @@ def login():
     print("------------------------", current_user)
     return render_template('login-5.html')
 
-
+@app.route('/get_users')
+def users():
+    user_schema = UserSchema(many=True)
+    users = user_schema.dump(User.query.all()).data
+    
+    return  jsonify(users)
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():   

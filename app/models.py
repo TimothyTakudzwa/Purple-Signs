@@ -55,6 +55,10 @@ class User(db.Model, UserMixin):
         return cls.query.filter_by(id=_id).first()
     
     @staticmethod
+    def get_all():
+        return Section.query.all()
+    
+    @staticmethod
     def update_payment(id, paid):
         user=User.query.filter_by(id=id).first()
         user.paid = paid
@@ -83,6 +87,10 @@ class Billing(db.Model):
         user.poll_url = poll_url
         user.save()
         return '' 
+    
+    @staticmethod
+    def get_all():
+        return Section.query.all()
 
 class Alphabet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -207,8 +215,13 @@ class SectionSchema(ma.ModelSchema):
 
 class UserSchema(ma.ModelSchema):
     class Meta:
-        fields = ('id', 'name')
-        model = Section
+        fields = ('id', 'first_name')
+        model = User
+
+class BillingSchema(ma.ModelSchema):
+    class meta:
+        fields = ('id', 'poll_url')
+        model = Billing  
 
 class AllPhrases(Resource):
     
