@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(120), unique=True, nullable=False)
     first_name = db.Column(db.String(120))
     surname = db.Column(db.String(120))
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    email = db.Column(db.String(120))
     phone = db.Column(db.String(120))
     social_id = db.Column(db.String(64), unique=True)
     password_hash = db.Column(db.String(200))
@@ -215,15 +215,15 @@ class SectionSchema(ma.ModelSchema):
         fields = ('id', 'section_name', 'course_id', 'file_name')
         model = Section
 
-class UserSchema(ma.ModelSchema):
+class BillingSchema(ma.ModelSchema):
     class Meta:
         fields = ('id', 'poll_url', 'user_id', 'status')
-        model = User
+        model = Billing
 
-class BillingSchema(ma.ModelSchema):
-    class meta:
-        fields = ('id', 'poll_url')
-        model = Billing  
+class UserSchema(ma.ModelSchema):
+    class Meta:
+        fields = ('id', 'first_name')
+        model = User
 
 class AllPhrases(Resource):
     

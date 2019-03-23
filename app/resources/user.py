@@ -35,9 +35,11 @@ class UserRegister(Resource):
       
         username = data['username'].lower()
         if User.find_by_username(data['username']):
-            return {'message':'username already exists', }, 400
+            if User.find_by_email(data['email']):
+                return {'message':'email already taken','status':2 }, 400
+            return {'message':'username already exists', 'status':1 }, 400
         if User.find_by_email(data['email']):
-            return {'message':'email already taken', }, 400
+            return {'message':'email already taken','status':0 }, 400
         else:
             
             user = User(username=username,first_name=data['first_name'],surname=data['surname'], phone=data['phone'], email=data['email'], 

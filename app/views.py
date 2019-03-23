@@ -76,13 +76,17 @@ def login():
     print("------------------------", current_user)
     return render_template('login-5.html')
 
+@app.route('/get_billing')
+def billing():
+    billing_schema = BillingSchema(many=True)
+    billing = billing_schema.dump(Billing.query.all()).data    
+    return  jsonify(billing)
+
 @app.route('/get_users')
-def users():
+def user():
     user_schema = UserSchema(many=True)
-    users = user_schema.dump(Billing.query.all()).data    
+    users = user_schema.dump(User.query.all()).data    
     return  jsonify(users)
-
-
 
 @app.route('/update_payment')
 def payment():

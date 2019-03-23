@@ -176,6 +176,9 @@ License: You must have a valid license purchased only from themeforest(the above
 							</div>
 							<div class="form-group m-form__group">
 								<input class="form-control m-input" type="email" placeholder="Email" id="emailInput">
+								<span class="text-center" id="error_message3" style=" color:red; display: none">Email
+									Already Taken
+								</span>
 							</div>
 							<div class="form-group m-form__group">
 
@@ -355,6 +358,11 @@ License: You must have a valid license purchased only from themeforest(the above
 							$("#signupform").removeClass("m-loader m-loader--right m-loader--light")
 							if (data.paid==false){
 								user_id = data.id
+								$("#message_sent").hide();
+								$("#message_error").hide();
+								$("#message_paid").hide();
+								$("#initial").show();
+								$("#message_cancelled").hide();
 								$('#examplemodal').modal('show');
 							}
 							else{
@@ -385,14 +393,33 @@ License: You must have a valid license purchased only from themeforest(the above
 					type: "POST",
 					url: "/register",
 					complete: function (response) {
-						if (response.status == 201) {							
-							user_id = response.responseJSON.id							
+						if (response.status == 201) {	
+							$("#error_message2").hide();
+							$("#error_message3").hide();						
+							user_id = response.responseJSON.id
+							$("#message_sent").hide();
+							$("#message_error").hide();
+							$("#message_paid").hide();
+							$("#initial").show();
+							$("#message_cancelled").hide();
+							$('#examplemodal').modal('show');							
 							$('#examplemodal').modal('show');
 							$("#signupform").removeClass("m-loader m-loader--right m-loader--light")
 
 						}
-						if (response.status == 400) {							
-							$("#error_message2").show();
+						if (response.status == 400) {		
+							if(response.responseJSON.status==0){
+								$("#error_message3").show();
+								$("#error_message2").hide();
+							}				
+							if(response.responseJSON.status==1){
+								$("#error_message2").show();
+								$("#error_message3").hide();
+							}
+							else{
+								$("#error_message2").show();
+								$("#error_message3").show();
+							}
 							$("#signupform").removeClass("m-loader m-loader--right m-loader--light")
 						}
 					}
