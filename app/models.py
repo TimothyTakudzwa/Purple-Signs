@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(120), unique=True, nullable=False)
     first_name = db.Column(db.String(120))
     surname = db.Column(db.String(120))
-    email = db.Column(db.String(120))
+    
     phone = db.Column(db.String(120))
     social_id = db.Column(db.String(64), unique=True)
     password_hash = db.Column(db.String(200))
@@ -46,10 +46,6 @@ class User(db.Model, UserMixin):
     def find_by_username(cls, username):
         return cls.query.filter_by(username=username).first()
     
-    @classmethod
-    def find_by_email(cls, email):
-        return cls.query.filter_by(email=email).first()
-
     @classmethod
     def find_by_id(cls, _id):
         return cls.query.filter_by(id=_id).first()

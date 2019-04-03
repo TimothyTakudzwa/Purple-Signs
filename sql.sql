@@ -1,4 +1,4 @@
-BEGIN TRANSACTION;
+
 INSERT INTO `user` (id,username,first_name,surname,email,phone,social_id,password_hash,dob,paid) VALUES (1,'Timothy','Timothy','Timothy','timothytakudzwa@gmail.com','0774231343',NULL,'pbkdf2:sha256:50000$rjR1kSKM$67382fe7eb5f46945e9054ba35405c9676fa4d6d55d2ae4e144c2ba3c25d6419',NULL,NULL),
  (2,'takudzwa','Melphin','Ngorima','melphinmugano@gmail.com','0774231343',NULL,'pbkdf2:sha256:50000$MxNmjMmA$6ba666dc3c99296b23aac1233b75d54f103150c47101eb90adb9c60dcfa4990e',NULL,0);
 INSERT INTO `phrases` (id,phrase,file_name,image_path,class_id) VALUES (1,'Animal','Animals.mp4',NULL,1),
