@@ -32,7 +32,7 @@ def pay():
     phone_number = data['phone_number']
     user_id = data['id']   
     payment = paynow.create_payment('Subscription Payment', 'admin@purplesigns.co.zw')
-    payment.add('Payment for stuff', 5)
+    payment.add('Payment for stuff', 2)
     response = paynow.send_mobile(payment, phone_number, 'ecocash')
 
     if(response.success):
