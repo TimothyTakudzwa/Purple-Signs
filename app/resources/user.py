@@ -32,7 +32,7 @@ class UserRegister(Resource):
         print("+++++++++++++++++++ My Data ++++++++++++++++++++",data)
         username = data['username'].lower()
         if User.find_by_username(data['username']):            
-            return {'message':'username already exists', 'status':1 }, 400       
+            return {'message':'username already exists', 'status':1 }, 201      
         else:            
             user = User(username=username,first_name=data['first_name'],surname=data['surname'], phone=data['phone'], 
                 password_hash=generate_password_hash(data['password']), paid=False)
